@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tick tock</title>
+</head>
+
+<body>
+  <p></p>
+  <script>
+    let questionsArr = ["car 1", "car 2", "car 3", "car 4"];
+    let anotherArr = ["boat 1", "boat 2", "boat 3", "boat 4"];
+    let thridArr = ["trains 1", "trains 2", "train 3", "train 4"];
+    let fourthArr = ["plane 1", "plane 2", "plane 3", "plane 4"];
+    let wordsToCheck = ["1", "2", "3", "4"]
+    let p = document.querySelector("p");
+    const questionsOGLength = questionsArr.length;
+    let usedQuestions = [];
+    let question;
+    function hashWord(arr) {
+      question = arr[Math.floor(Math.random() * arr.length)];
+      let questionIndex = arr.indexOf(question);
+      arr.splice(questionIndex, 1);
+      usedQuestions.push(question);
+      let splitq = question.split(" ");
+      for (var i = 0; i < wordsToCheck.length; i++) {
+        splitq.map((split, index) => {
+          if (split.indexOf(wordsToCheck[i]) > -1) {
+            splitq[splitq.indexOf(splitq[index])] = `#${split}`;
+            p.textContent = splitq.join(" ")
+          }
+        });
+      }
+    }
+    function resetArr(arr1, arr2) {
+      console.log(arr1);
+      console.log(arr2);
+    }
+    setInterval(() => {
+      let date = new Date();
+      let hour = date.getHours();
+      let minute = date.getMinutes();
+      console.log(minute);
+      // if (usedQuestions.length < questionsOGLength) {
+      //   if(minute === 15) hashWord(questionsArr);
+      //   if(minut === 16) hashWord(anotherArr);
+      // } else {
+      //   questionsArr = usedQuestions;
+      //   usedQuestions = [];
+      // }
+      if (minute === 45) {
+        hashWord(questionsArr);
+        resetArr(questionsArr, usedQuestions);
+      }
+      else if (minute === 46) {
+        hashWord(anotherArr);
+        resetArr(anotherArr, usedQuestions);
+      }
+      else if (minute === 47) {
+        hashWord(thridArr);
+        resetArr(thridArr, usedQuestions);
+      }
+      else if (minute === 48) {
+        hashWord(fourthArr);
+        resetArr(thridArr, usedQuestions);
+      }
+      else {
+        questionsArr = new Array(questionsArr)[0];
+        anotherArr = new Array(anotherArr)[0];
+        thridArr = new Array(thridArr)[0];
+        fourthArr = new Array(fourthArr)[0];
+        usedQuestions = [];
+        console.log(questionsArr);
+        console.log(anotherArr);
+        console.log(thridArr);
+        console.log(fourthArr);
+        console.log(usedQuestions);
+      }
+    }, 20000);
+    // 7a-11a
+    // 11a-3p
+    // 3p-7p
+    // 7p-11p
+    // 11p-3a
+    // 3a-7a
+  </script>
+</body>
+
+</html>
